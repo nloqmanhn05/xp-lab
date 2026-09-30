@@ -1469,6 +1469,18 @@ function render() {
       }
     }
   }
+
+  // Trigger tour ONLY when user has successfully signed up
+  try {
+    if (sessionStorage.getItem('xpl_trigger_tour') && V === 'home' && !activeModal) {
+      sessionStorage.removeItem('xpl_trigger_tour');
+      setTimeout(() => {
+        if (typeof startTour === 'function' && !tourActive) {
+          startTour();
+        }
+      }, 500);
+    }
+  } catch (e) {}
 }
 
 /* ==========================================================================
@@ -1558,10 +1570,3 @@ function animateResultsCounters() {
 
 // Initial render call
 render();
-
-// Auto-launch tour on first visit
-try {
-  if (!localStorage.getItem('xpl_tour_seen') && V === 'home') {
-    setTimeout(() => startTour(), 800);
-  }
-} catch(e) {}

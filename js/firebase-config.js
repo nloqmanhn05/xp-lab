@@ -351,6 +351,7 @@ async function handleAuthSubmit() {
 
   try {
     if (!window.__FB || !fbAuth) throw new Error("Firebase SDK is initializing or offline.");
+    const isSignUp = authTab !== "signin";
     if (authTab === "signin") {
       await window.__FB.signInWithEmailAndPassword(fbAuth, email, password);
       trackEvent('login', { method: 'password' });
@@ -362,6 +363,7 @@ async function handleAuthSubmit() {
         } catch (e) {}
       }
       trackEvent('sign_up', { method: 'password' });
+      try { sessionStorage.setItem('xpl_trigger_tour', 'true'); } catch (e) {}
     }
     activeModal = null;
     if (typeof pendingRevision !== 'undefined' && pendingRevision) {
@@ -377,6 +379,14 @@ async function handleAuthSubmit() {
     }
     if (typeof V !== 'undefined' && V === 'auth' && typeof go === 'function') {
       go('home');
+    }
+    if (isSignUp) {
+      setTimeout(() => {
+        if (typeof startTour === 'function' && (typeof V === 'undefined' || V === 'home')) {
+          try { sessionStorage.removeItem('xpl_trigger_tour'); } catch (e) {}
+          startTour();
+        }
+      }, 500);
     }
   } catch (err) {
     authError = err.message.replace("Firebase: ", "");
