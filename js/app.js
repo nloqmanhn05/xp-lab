@@ -1570,3 +1570,11 @@ function animateResultsCounters() {
 
 // Initial render call
 render();
+
+// Prevent copying text across study sessions and terminal
+document.addEventListener('copy', e => {
+  const active = document.activeElement;
+  if (!active || !active.classList.contains('input-field')) {
+    e.preventDefault();
+  }
+});

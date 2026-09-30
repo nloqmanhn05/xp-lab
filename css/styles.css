@@ -145,6 +145,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 24px);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input.input-field, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 /* Widescreen Desktop Container (Expands to 1180px) */
@@ -713,7 +724,7 @@ button.metric-tile:hover {
   font-size: inherit;
   outline: none;
   padding: 0;
-  caret-color: #ffffff;
+  caret-color: transparent;
 }
 
 /* Flat Feedback Box */
