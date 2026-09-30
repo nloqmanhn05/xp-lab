@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sign In & Account - XP Lab Trainer</title>
+  <meta name="description" content="Sign in or register for XP Lab Trainer to sync streak days, task mastery, and mock exam personal records with Firebase project xp-lab-9b863.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    // Ensure initial view is auth
+    if (!window.location.hash) {
+      window.location.hash = 'auth';
+    }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Firebase Modular Web SDK v10 (ESM CDN loader) -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { 
+      getAuth, 
+      signInWithEmailAndPassword, 
+      createUserWithEmailAndPassword, 
+      updateProfile,
+      signInWithPopup, 
+      GoogleAuthProvider, 
+      signOut, 
+      onAuthStateChanged, 
+      sendPasswordResetEmail 
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc, 
+      updateDoc, 
+      collection, 
+      addDoc, 
+      serverTimestamp 
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { 
+      getAnalytics, 
+      logEvent, 
+      isSupported as isAnalyticsSupported 
+    } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js';
+
+    window.__FB = {
+      initializeApp,
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      updateProfile,
+      signInWithPopup,
+      GoogleAuthProvider,
+      signOut,
+      onAuthStateChanged,
+      sendPasswordResetEmail,
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc,
+      collection,
+      addDoc,
+      serverTimestamp,
+      getAnalytics,
+      logEvent,
+      isAnalyticsSupported
+    };
+
+    window.dispatchEvent(new CustomEvent('firebase-sdk-ready'));
+  </script>
+
+  <!-- Application Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
